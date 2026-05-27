@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpf28ldws6261"]
+
+[ext_resource type="Script" uid="uid://btggycn5107au" path="res://node_2d.gd" id="1_7wcun"]
+[ext_resource type="Texture2D" uid="uid://4mvpfht7t3q" path="res://New Piskel-1.png (20).png" id="2_dcmoc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmoj4"]
+size = Vector2(32.002438, 28)
+
+[node name="Water" type="Area2D"]
+scale = Vector2(6.936971, 1)
+script = ExtResource("1_7wcun")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4.8116965e-07, 2)
+shape = SubResource("RectangleShape2D_qmoj4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dcmoc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
