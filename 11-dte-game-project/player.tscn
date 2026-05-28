@@ -135,3 +135,4 @@ scale = Vector2(0.7999997, 1.1199999)
 shape = SubResource("CircleShape2D_op7ga")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
