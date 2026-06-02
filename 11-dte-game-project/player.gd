@@ -14,8 +14,17 @@ var gravity = NORMAL_GRAVITY
 var jump_force = NORMAL_JUMP
 
 var in_water = false
+var bananas = 0
 
 @onready var anim = $AnimatedSprite2D
+@onready var banana_label = $"../CanvasLayer/BananaLabel"
+
+func _ready():
+	banana_label.text = "Bananas: 0"
+
+func add_banana():
+	bananas += 1
+	banana_label.text = "Bananas: " + str(bananas)
 
 func _physics_process(delta):
 
@@ -58,7 +67,6 @@ func _physics_process(delta):
 		anim.play("idle")
 
 	move_and_slide()
-
 
 # WATER DETECTION
 func _on_water_body_entered(body):
