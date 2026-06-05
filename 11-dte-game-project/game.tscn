@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://2qcr1jq0mj53"]
+[gd_scene load_steps=23 format=3 uid="uid://2qcr1jq0mj53"]
 
 [ext_resource type="Texture2D" uid="uid://4mvpfht7t3q" path="res://New Piskel-1.png (20).png" id="1_eow3j"]
 [ext_resource type="Texture2D" uid="uid://bdgjj8vyxklya" path="res://download-removebg-preview (4).png" id="1_fc0e3"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://wddnse8xh4ov" path="res://Border.tscn" id="10_hve3p"]
 [ext_resource type="PackedScene" uid="uid://bxn4s063bjbya" path="res://death_barrier.tscn" id="11_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://bdfoihickx4f6" path="res://banana.tscn" id="12_iotsf"]
+[ext_resource type="Script" uid="uid://dvlrnt8u2favc" path="res://damage_zone.gd" id="13_lc2xo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vef74"]
 texture = ExtResource("1_eow3j")
@@ -959,6 +960,9 @@ font_color = Color(1, 0.8156863, 0, 1)
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iotsf"]
+size = Vector2(80, 52)
+
 [node name="Game" type="Node2D"]
 
 [node name="Border" parent="." instance=ExtResource("10_hve3p")]
@@ -1003,3 +1007,14 @@ position = Vector2(2205.0002, 199)
 offset_right = 164.0
 offset_bottom = 47.0
 label_settings = SubResource("LabelSettings_iotsf")
+
+[node name="DamageZone" type="Area2D" parent="."]
+script = ExtResource("13_lc2xo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
+position = Vector2(117, -27)
+scale = Vector2(1.2172663, -1.4441986)
+shape = SubResource("RectangleShape2D_iotsf")
+
+[connection signal="body_entered" from="DamageZone" to="Water" method="_on_damage_zone_body_entered"]
+[connection signal="body_exited" from="DamageZone" to="Water" method="_on_damage_zone_body_exited"]

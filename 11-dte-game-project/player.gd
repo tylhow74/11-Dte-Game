@@ -14,21 +14,42 @@ var gravity = NORMAL_GRAVITY
 var jump_force = NORMAL_JUMP
 
 var in_water = false
-var bananas = 0
+
+var max_health = 100
+var health = 100
 
 @onready var anim = $AnimatedSprite2D
-@onready var banana_label = $"../CanvasLayer/BananaLabel"
+@onready var hp_bar = $ProgressBar
 
 func _ready():
-	banana_label.text = "Bananas: 0"
+	hp_bar.min_value = 0
+	hp_bar.max_value = max_health
+	hp_bar.value = health
 
-func add_banana():
-	bananas += 1
-	banana_label.text = "Bananas: " + str(bananas)
+func take_damage(amount):
+	health -= amount
+	health = clamp(health, 0, max_health)
+
+	hp_bar.value = health
+
+	print("HP:", health)
+
+	if health <= 0:
+		die()
+
+func heal(amount):
+	health += amount
+	health = clamp(health, 0, max_health)
+
+	hp_bar.value = health
+
+func die():
+	print("Game Over")
+	queue_free()
 
 func _physics_process(delta):
 
-	# Change physics if in water
+	# Water physics
 	if in_water:
 		speed = WATER_SPEED
 		gravity = WATER_GRAVITY
@@ -68,7 +89,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-# WATER DETECTION
 func _on_water_body_entered(body):
 	if body == self:
 		in_water = true
