@@ -1012,7 +1012,7 @@ label_settings = SubResource("LabelSettings_iotsf")
 script = ExtResource("13_lc2xo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
-position = Vector2(117, -27)
+position = Vector2(-81.99997, -471)
 scale = Vector2(1.2172663, -1.4441986)
 shape = SubResource("RectangleShape2D_iotsf")
 

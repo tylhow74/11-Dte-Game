@@ -20,6 +20,11 @@ var health = 100
 
 @onready var anim = $AnimatedSprite2D
 @onready var hp_bar = $ProgressBar
+@onready var bananas = %BananaLabel
+
+func add_banana():
+	bananas += 1
+	banana_label.text = "Bananas: " + str(bananas)
 
 func _ready():
 	hp_bar.min_value = 0
