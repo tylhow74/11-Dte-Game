@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
-const NORMAL_SPEED = 200
-const WATER_SPEED = 100
+const NORMAL_SPEED = 200.0
+const WATER_SPEED = 100.0
 
-const NORMAL_GRAVITY = 900
-const WATER_GRAVITY = 200
+const NORMAL_GRAVITY = 900.0
+const WATER_GRAVITY = 200.0
 
-const NORMAL_JUMP = -350
-const WATER_JUMP = -150
+const NORMAL_JUMP = -350.0
+const WATER_JUMP = -150.0
 
 var speed = NORMAL_SPEED
 var gravity = NORMAL_GRAVITY
@@ -18,43 +18,50 @@ var in_water = false
 var max_health = 100
 var health = 100
 
+var banana_count = 0
+
 @onready var anim = $AnimatedSprite2D
 @onready var hp_bar = $ProgressBar
-@onready var bananas = %BananaLabel
+@onready var banana_label = $"../CanvasLayer/BananaLabel"
 
-func add_banana():
-	bananas += 1
-	banana_label.text = "Bananas: " + str(bananas)
 
 func _ready():
 	hp_bar.min_value = 0
 	hp_bar.max_value = max_health
 	hp_bar.value = health
+	banana_label.text = "Bananas: 0"
 
-func take_damage(amount):
-	health -= amount
-	health = clamp(health, 0, max_health)
 
-	hp_bar.value = health
+func add_banana():
+	banana_count += 1
+	banana_label.text = "Bananas: " + str(banana_count)
 
-	print("HP:", health)
 
-	if health <= 0:
-		die()
+# ---------------- WATER FIX (CORRECT METHOD) ----------------
+func check_water():
+	in_water = false
 
-func heal(amount):
-	health += amount
-	health = clamp(health, 0, max_health)
+	var space_state = get_world_2d().direct_space_state
 
-	hp_bar.value = health
+	var params = PhysicsPointQueryParameters2D.new()
+	params.position = global_position
+	params.collide_with_areas = true
+	params.collide_with_bodies = true
 
-func die():
-	print("Game Over")
-	queue_free()
+	var result = space_state.intersect_point(params)
 
+	for hit in result:
+		var obj = hit.collider
+		if obj and obj.is_in_group("water"):
+			in_water = true
+			return
+
+
+# ---------------- PHYSICS ----------------
 func _physics_process(delta):
 
-	# Water physics
+	check_water()
+
 	if in_water:
 		speed = WATER_SPEED
 		gravity = WATER_GRAVITY
@@ -64,27 +71,20 @@ func _physics_process(delta):
 		gravity = NORMAL_GRAVITY
 		jump_force = NORMAL_JUMP
 
-	# Gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Jump
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_force
-
-	# Movement
 	var direction = Input.get_axis("move_left", "move_right")
 
-	if direction:
-		velocity.x = direction * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-
-	# Flip sprite
 	if direction != 0:
+		velocity.x = direction * speed
 		anim.flip_h = direction < 0
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed * 8 * delta)
 
-	# Animations
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or in_water):
+		velocity.y = jump_force
+
 	if not is_on_floor():
 		anim.play("jump")
 	elif direction != 0:
@@ -93,11 +93,3 @@ func _physics_process(delta):
 		anim.play("idle")
 
 	move_and_slide()
-
-func _on_water_body_entered(body):
-	if body == self:
-		in_water = true
-
-func _on_water_body_exited(body):
-	if body == self:
-		in_water = false
