@@ -119,8 +119,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_op7ga"]
-radius = 24.186773
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(40.000015, 48.21429)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onrkg"]
 bg_color = Color(0, 0.6259579, 0.19399011, 1)
@@ -138,9 +138,9 @@ sprite_frames = SubResource("SpriteFrames_u1c27")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 2)
+position = Vector2(5, 1)
 scale = Vector2(0.7999997, 1.1199999)
-shape = SubResource("CircleShape2D_op7ga")
+shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -48.0

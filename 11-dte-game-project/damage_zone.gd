@@ -2,8 +2,13 @@ extends Area2D
 
 @export var damage = 10
 
-func _on_body_entered(DamageZone):
-	print("Zone hit:", DamageZone.name)
 
-	if DamageZone.has_method("take_damage"):
-		DamageZone.take_damage(damage)
+func _ready():
+	body_entered.connect(_on_body_entered)
+
+
+func _on_body_entered(body):
+	print("Zone hit:", body.name)
+
+	if body.has_method("take_damage"):
+		body.take_damage(damage)

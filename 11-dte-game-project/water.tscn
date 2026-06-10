@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmoj4"]
 size = Vector2(32.002438, 28)
 
-[node name="Water" type="Area2D"]
+[node name="Water" type="Area2D" groups=["water"]]
 scale = Vector2(6.936971, 1)
 script = ExtResource("1_7wcun")
 
