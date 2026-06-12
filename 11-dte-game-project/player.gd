@@ -6,7 +6,7 @@ const WATER_SPEED = 100.0
 const NORMAL_GRAVITY = 900.0
 const WATER_GRAVITY = 200.0
 
-const NORMAL_JUMP = -350.0
+const NORMAL_JUMP = -375
 const WATER_JUMP = -150.0
 
 var speed = NORMAL_SPEED
