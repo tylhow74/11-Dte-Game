@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://18mfnlls461l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqquq"]
+
+[node name="Enemy" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gqquq")
+frame_progress = 0.7178999

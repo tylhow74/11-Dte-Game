@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0vpsni60hid5"]
+
+[ext_resource type="Texture2D" uid="uid://bdke7l0ecnxbk" path="res://New Piskel-1.png (27).png" id="1_ftl74"]
+[ext_resource type="Script" uid="uid://bdx71nb8tyepo" path="res://button.gd" id="2_5mq0c"]
+
+[node name="Deathscreen" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324.5)
+scale = Vector2(36.0625, 20.28125)
+texture = ExtResource("1_ftl74")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 322.0
+offset_top = 88.0
+offset_right = 833.0
+offset_bottom = 397.0
+theme_override_colors/font_color = Color(0.3268831, 3.3992342e-07, 1.2032687e-07, 1)
+theme_override_font_sizes/font_size = 100
+text = "You Died!"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 446.0
+offset_top = 378.0
+offset_right = 665.0
+offset_bottom = 434.0
+theme_override_colors/font_color = Color(0.3254902, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+script = ExtResource("2_5mq0c")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]
