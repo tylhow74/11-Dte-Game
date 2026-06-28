@@ -1,13 +1,12 @@
 extends CharacterBody2D
 
-
 const NORMAL_SPEED = 200.0
 const WATER_SPEED = 100.0
 
 const NORMAL_GRAVITY = 900.0
 const WATER_GRAVITY = 200.0
 
-const NORMAL_JUMP = -375
+const NORMAL_JUMP = -375.0
 const WATER_JUMP = -150.0
 
 
@@ -19,6 +18,7 @@ var in_water = false
 
 var max_health = 100
 var health = 100
+
 var invincible = false
 var dead = false
 
@@ -28,7 +28,6 @@ var banana_count = 0
 @onready var anim = $AnimatedSprite2D
 @onready var hp_bar = $ProgressBar
 @onready var banana_label = $"../CanvasLayer/BananaLabel"
-
 
 
 func _ready():
@@ -41,9 +40,6 @@ func _ready():
 
 
 
-# ---------------- MOVEMENT ----------------
-
-
 func _physics_process(delta):
 
 	if dead:
@@ -53,33 +49,25 @@ func _physics_process(delta):
 	check_water()
 
 
+	# Water / normal physics
 	if in_water:
-
 		speed = WATER_SPEED
 		gravity = WATER_GRAVITY
 		jump_force = WATER_JUMP
 
-		if velocity.y > 100:
-			velocity.y = 100
-
 	else:
-
 		speed = NORMAL_SPEED
 		gravity = NORMAL_GRAVITY
 		jump_force = NORMAL_JUMP
 
 
-
+	# Gravity
 	if not is_on_floor():
-
 		velocity.y += gravity * delta
 
 
-
-	var direction = Input.get_axis(
-		"move_left",
-		"move_right"
-	)
+	# Movement
+	var direction = Input.get_axis("move_left", "move_right")
 
 
 	if direction != 0:
@@ -89,14 +77,10 @@ func _physics_process(delta):
 
 	else:
 
-		velocity.x = move_toward(
-			velocity.x,
-			0,
-			speed * 8 * delta
-		)
+		velocity.x = 0
 
 
-
+	# Jump
 	if Input.is_action_just_pressed("jump"):
 
 		if is_on_floor() or in_water:
@@ -105,6 +89,7 @@ func _physics_process(delta):
 
 
 
+	# Animations
 	if not is_on_floor():
 
 		anim.play("jump")
@@ -116,7 +101,6 @@ func _physics_process(delta):
 	else:
 
 		anim.play("idle")
-
 
 
 	move_and_slide()
@@ -152,7 +136,6 @@ func check_water():
 
 
 
-
 # ---------------- BANANAS ----------------
 
 
@@ -172,8 +155,6 @@ func update_banana_ui():
 
 
 
-
-
 # ---------------- DAMAGE ----------------
 
 
@@ -184,24 +165,14 @@ func take_damage(amount):
 		return
 
 
-
-	invincible = true
-
-
 	health -= amount
 
-	health = clamp(
-		health,
-		0,
-		max_health
-	)
-
+	health = clamp(health, 0, max_health)
 
 	hp_bar.value = health
 
 
 	flash_red()
-
 
 
 	if health <= 0:
@@ -211,11 +182,11 @@ func take_damage(amount):
 		return
 
 
+	invincible = true
 
 	await get_tree().create_timer(0.5).timeout
 
 	invincible = false
-
 
 
 
@@ -235,45 +206,21 @@ func flash_red():
 
 
 
-
-
-# ---------------- DEATH SCREEN ----------------
-
+# ---------------- DEATH ----------------
 
 func die():
 
 	if dead:
-
 		return
 
-
 	dead = true
-
-
 	velocity = Vector2.ZERO
 
+	var death_screen = get_tree().get_first_node_in_group("death_screen")
 
-	var death_screen = preload(
-		"res://DeathScreen.tscn"
-	).instantiate()
+	if death_screen == null:
+		print("STILL NO DEATH SCREEN (GROUP NOT FOUND)")
+		return
 
-
-	get_tree().current_scene.add_child(
-		death_screen
-	)
-
-
+	death_screen.show_death_screen()
 	get_tree().paused = true
-
-
-
-
-
-# ---------------- RESTART ----------------
-
-
-func restart_game():
-
-	get_tree().paused = false
-
-	get_tree().reload_current_scene()

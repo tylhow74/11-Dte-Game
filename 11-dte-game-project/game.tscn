@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bxn4s063bjbya" path="res://death_barrier.tscn" id="11_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://bdfoihickx4f6" path="res://banana.tscn" id="12_iotsf"]
 [ext_resource type="Script" uid="uid://dvlrnt8u2favc" path="res://damage_zone.gd" id="13_lc2xo"]
-[ext_resource type="PackedScene" uid="uid://b0vpsni60hid5" path="res://deathscreen.tscn" id="16_80cx4"]
+[ext_resource type="Script" uid="uid://crsy6tw1agbxl" path="res://control.gd" id="16_80cx4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vef74"]
 texture = ExtResource("1_eow3j")
@@ -1043,7 +1043,27 @@ scale = Vector2(1.2172663, -1.4441986)
 shape = SubResource("RectangleShape2D_iotsf")
 disabled = true
 
-[node name="Deathscreen" parent="." instance=ExtResource("16_80cx4")]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer2" groups=["death_screen"]]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_80cx4")
+
+[node name="restartbutton" type="Button" parent="CanvasLayer2/Control"]
+process_mode = 3
+layout_mode = 0
+offset_left = 55.0
+offset_top = 5.0
+offset_right = 130.0
+offset_bottom = 36.0
+text = "RESTART"
 
 [connection signal="body_entered" from="DamageZone" to="Water" method="_on_damage_zone_body_entered"]
 [connection signal="body_exited" from="DamageZone" to="Water" method="_on_damage_zone_body_exited"]
+[connection signal="pressed" from="CanvasLayer2/Control/restartbutton" to="CanvasLayer2/Control" method="_on_restartbutton_pressed"]

@@ -1,4 +1,13 @@
 extends Button
 
-func _on_restart_button_pressed():
-	get_tree().change_scene_to_file("res://game.tscn")
+
+func _ready():
+	pressed.connect(_on_pressed)
+
+
+func _on_pressed():
+
+	print("RESTART WORKS")
+
+	get_tree().paused = false
+	get_tree().reload_current_scene()
