@@ -14,3 +14,7 @@ func hide_death_screen():
 func _on_restartbutton_pressed() -> void:
 		get_tree().paused = false
 		get_tree().reload_current_scene()
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()
