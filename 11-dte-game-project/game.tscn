@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://2qcr1jq0mj53"]
+[gd_scene load_steps=38 format=3 uid="uid://2qcr1jq0mj53"]
 
 [ext_resource type="Texture2D" uid="uid://4mvpfht7t3q" path="res://New Piskel-1.png (20).png" id="1_eow3j"]
 [ext_resource type="Texture2D" uid="uid://bdgjj8vyxklya" path="res://download-removebg-preview (4).png" id="1_fc0e3"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bdke7l0ecnxbk" path="res://New Piskel-1.png (27).png" id="17_e8heu"]
 [ext_resource type="Texture2D" uid="uid://dmjl474j8pwfm" path="res://New Piskel-1.png (28).png" id="18_boyg6"]
 [ext_resource type="Script" uid="uid://dgvbf54egdgl2" path="res://quitbutton.gd" id="18_rvswv"]
+[ext_resource type="Script" uid="uid://rxc4o2ld4bpw" path="res://blackness.gd" id="20_e36ub"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e36ub"]
 texture = ExtResource("17_e8heu")
@@ -1013,6 +1014,9 @@ bg_color = Color(0.12038282, 4.843157e-07, 2.7675182e-07, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boyg6"]
 bg_color = Color(0.12156863, 0, 0, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hb5m1"]
+size = Vector2(1026.5, 288)
+
 [node name="Game" type="Node2D"]
 
 [node name="Border" parent="." instance=ExtResource("10_hve3p")]
@@ -1132,7 +1136,26 @@ text = "Quit
 "
 script = ExtResource("18_rvswv")
 
+[node name="Blackness" type="Area2D" parent="."]
+script = ExtResource("20_e36ub")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blackness"]
+position = Vector2(3921.75, -9)
+shape = SubResource("RectangleShape2D_hb5m1")
+
+[node name="ColorRect" type="ColorRect" parent="Blackness"]
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.98039216)
+
 [connection signal="body_entered" from="Damage Zone" to="Water" method="_on_damage_zone_body_entered"]
 [connection signal="body_exited" from="Damage Zone" to="Water" method="_on_damage_zone_body_exited"]
 [connection signal="pressed" from="Death Screen/Death Screen/Restart button" to="Death Screen/Death Screen" method="_on_restartbutton_pressed"]
 [connection signal="pressed" from="Death Screen/Death Screen/Quit button" to="Death Screen/Death Screen" method="_on_quitbutton_pressed"]
+[connection signal="body_entered" from="Blackness" to="Player" method="_on_blackness_body_entered"]
+[connection signal="body_exited" from="Blackness" to="Player" method="_on_blackness_body_exited"]
