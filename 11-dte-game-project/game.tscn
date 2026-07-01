@@ -1015,7 +1015,7 @@ bg_color = Color(0.12038282, 4.843157e-07, 2.7675182e-07, 1)
 bg_color = Color(0.12156863, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hb5m1"]
-size = Vector2(1026.5, 288)
+size = Vector2(1088.5, 314)
 
 [node name="Game" type="Node2D"]
 
@@ -1140,18 +1140,17 @@ script = ExtResource("18_rvswv")
 script = ExtResource("20_e36ub")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Blackness"]
-position = Vector2(3921.75, -9)
+position = Vector2(3952.75, -22)
 shape = SubResource("RectangleShape2D_hb5m1")
 
 [node name="ColorRect" type="ColorRect" parent="Blackness"]
 z_index = 100
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 3408.0
+offset_top = -303.0
+offset_right = 4498.0
+offset_bottom = 751.0
 mouse_filter = 2
-color = Color(0, 0, 0, 0.98039216)
+color = Color(0, 0, 0, 0.47058824)
 
 [connection signal="body_entered" from="Damage Zone" to="Water" method="_on_damage_zone_body_entered"]
 [connection signal="body_exited" from="Damage Zone" to="Water" method="_on_damage_zone_body_exited"]

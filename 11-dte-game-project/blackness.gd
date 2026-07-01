@@ -10,7 +10,7 @@ func player_entered(body):
 	print("ENTERED:", body.name)
 	if body.name == "Player":
 		dark_overlay.visible = true
-		dark_overlay.color = Color.RED
+		dark_overlay.color = Color(0, 0, 0, 0.5)
 
 func player_left(body):
 	if body.name == "Player":
