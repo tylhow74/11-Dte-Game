@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://2qcr1jq0mj53"]
+[gd_scene load_steps=39 format=3 uid="uid://2qcr1jq0mj53"]
 
 [ext_resource type="Texture2D" uid="uid://4mvpfht7t3q" path="res://New Piskel-1.png (20).png" id="1_eow3j"]
 [ext_resource type="Texture2D" uid="uid://bdgjj8vyxklya" path="res://download-removebg-preview (4).png" id="1_fc0e3"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dmjl474j8pwfm" path="res://New Piskel-1.png (28).png" id="18_boyg6"]
 [ext_resource type="Script" uid="uid://dgvbf54egdgl2" path="res://quitbutton.gd" id="18_rvswv"]
 [ext_resource type="Script" uid="uid://rxc4o2ld4bpw" path="res://blackness.gd" id="20_e36ub"]
+[ext_resource type="PackedScene" uid="uid://18mfnlls461l" path="res://Enemy.tscn" id="21_hb5m1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e36ub"]
 texture = ExtResource("17_e8heu")
@@ -1015,7 +1016,7 @@ bg_color = Color(0.12038282, 4.843157e-07, 2.7675182e-07, 1)
 bg_color = Color(0.12156863, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hb5m1"]
-size = Vector2(1088.5, 314)
+size = Vector2(1087.5, 314)
 
 [node name="Game" type="Node2D"]
 
@@ -1025,7 +1026,7 @@ rotation = 3.1415927
 scale = Vector2(1.1483412, -1.0128889)
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(615.00006, -237)
+position = Vector2(894, -233)
 scale = Vector2(316.81207, -123.61833)
 texture = ExtResource("1_vef74")
 
@@ -1140,7 +1141,7 @@ script = ExtResource("18_rvswv")
 script = ExtResource("20_e36ub")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Blackness"]
-position = Vector2(3952.75, -22)
+position = Vector2(3952.25, -22)
 shape = SubResource("RectangleShape2D_hb5m1")
 
 [node name="ColorRect" type="ColorRect" parent="Blackness"]
@@ -1151,6 +1152,9 @@ offset_right = 4498.0
 offset_bottom = 751.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.47058824)
+
+[node name="Enemy" parent="." instance=ExtResource("21_hb5m1")]
+position = Vector2(208, -11)
 
 [connection signal="body_entered" from="Damage Zone" to="Water" method="_on_damage_zone_body_entered"]
 [connection signal="body_exited" from="Damage Zone" to="Water" method="_on_damage_zone_body_exited"]
