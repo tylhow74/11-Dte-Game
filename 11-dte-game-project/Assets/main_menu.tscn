@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://clc0jnp8is1hb"]
+
+[ext_resource type="Script" uid="uid://2pv5xwoguxg4" path="res://Scenes/start.gd" id="1_kmbup"]
+[ext_resource type="Script" uid="uid://cc77n3upvbotc" path="res://Scenes/quit.gd" id="2_sqfmn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jix8l"]
+bg_color = Color(0.12225222, 0.12225225, 0.12225217, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu7sn"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glbon"]
+bg_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 651.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 103.0
+offset_right = 830.0
+offset_bottom = 219.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 85
+text = "Banana Blitz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 377.0
+offset_top = 261.0
+offset_right = 761.0
+offset_bottom = 355.0
+theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0, 1)
+theme_override_colors/font_hover_color = Color(0.98979706, 1, 0.60497564, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.99160606, 1, 0.4961443, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
+text = "Start"
+script = ExtResource("1_kmbup")
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 413.0
+offset_right = 761.0
+offset_bottom = 511.0
+theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0, 1)
+theme_override_colors/font_hover_color = Color(0.98979634, 1, 0.60498023, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.9897966, 1, 0.60498136, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_fu7sn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_glbon")
+text = "Quit"
+script = ExtResource("2_sqfmn")
+
+[connection signal="pressed" from="Start" to="Start" method="_on_pressed"]
+[connection signal="pressed" from="Quit" to="Start" method="_on_quit_pressed"]

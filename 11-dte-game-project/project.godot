@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="11 Dte Game Project"
-run/main_scene="uid://2qcr1jq0mj53"
+run/main_scene="uid://clc0jnp8is1hb"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
 [global_group]
