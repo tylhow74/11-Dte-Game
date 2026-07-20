@@ -15,11 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://robj3g0fn0p" path="res://Assets/player.tscn" id="13_oeip8"]
 [ext_resource type="PackedScene" uid="uid://bxn4s063bjbya" path="res://Assets/death_barrier.tscn" id="14_xe308"]
 [ext_resource type="PackedScene" uid="uid://bdfoihickx4f6" path="res://Assets/banana.tscn" id="15_d3cha"]
-[ext_resource type="Script" uid="uid://dvlrnt8u2favc" path="res://Scenes/damage_zone.gd" id="16_i26dy"]
-[ext_resource type="Script" uid="uid://crsy6tw1agbxl" path="res://Scenes/control.gd" id="17_lmoi6"]
+[ext_resource type="Script" uid="uid://dvlrnt8u2favc" path="res://Code/damage_zone.gd" id="16_i26dy"]
+[ext_resource type="Script" uid="uid://crsy6tw1agbxl" path="res://Code/control.gd" id="17_lmoi6"]
 [ext_resource type="Texture2D" uid="uid://dmjl474j8pwfm" path="res://Sprites/New Piskel-1.png (28).png" id="18_6uxt2"]
-[ext_resource type="Script" uid="uid://dgvbf54egdgl2" path="res://Scenes/quitbutton.gd" id="19_ym3tv"]
-[ext_resource type="Script" uid="uid://rxc4o2ld4bpw" path="res://Scenes/blackness.gd" id="20_bwj6o"]
+[ext_resource type="Script" uid="uid://dgvbf54egdgl2" path="res://Code/quitbutton.gd" id="19_ym3tv"]
+[ext_resource type="Script" uid="uid://rxc4o2ld4bpw" path="res://Code/blackness.gd" id="20_bwj6o"]
 [ext_resource type="PackedScene" uid="uid://18mfnlls461l" path="res://Assets/Enemy.tscn" id="21_f3c8l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e36ub"]
@@ -1000,12 +1000,6 @@ sources/6 = SubResource("TileSetAtlasSource_e8heu")
 sources/7 = SubResource("TileSetAtlasSource_rvswv")
 sources/8 = SubResource("TileSetAtlasSource_x5p1p")
 
-[sub_resource type="LabelSettings" id="LabelSettings_iotsf"]
-font_size = 40
-font_color = Color(1, 0.8156863, 0, 1)
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iotsf"]
 size = Vector2(80, 52)
 
@@ -1017,6 +1011,12 @@ bg_color = Color(0.12156863, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hb5m1"]
 size = Vector2(1087.5, 314)
+
+[sub_resource type="LabelSettings" id="LabelSettings_iotsf"]
+font_size = 40
+font_color = Color(1, 0.8156863, 0, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 
@@ -1060,13 +1060,6 @@ position = Vector2(3599.9998, -109.99999)
 
 [node name="Banana Collectable 2" parent="." instance=ExtResource("15_d3cha")]
 position = Vector2(2205.0002, 199)
-
-[node name="Banana Counter" type="CanvasLayer" parent="."]
-
-[node name="Banana Label" type="Label" parent="Banana Counter"]
-offset_right = 164.0
-offset_bottom = 47.0
-label_settings = SubResource("LabelSettings_iotsf")
 
 [node name="Damage Zone" type="Area2D" parent="."]
 position = Vector2(60, -18)
@@ -1155,6 +1148,13 @@ color = Color(0, 0, 0, 0.47058824)
 
 [node name="Enemy" parent="." instance=ExtResource("21_f3c8l")]
 position = Vector2(4270, 85)
+
+[node name="Banana Counter" type="CanvasLayer" parent="."]
+
+[node name="Banana Label" type="Label" parent="Banana Counter"]
+offset_right = 164.0
+offset_bottom = 47.0
+label_settings = SubResource("LabelSettings_iotsf")
 
 [connection signal="body_entered" from="Damage Zone" to="Water" method="_on_damage_zone_body_entered"]
 [connection signal="body_exited" from="Damage Zone" to="Water" method="_on_damage_zone_body_exited"]

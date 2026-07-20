@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=3 uid="uid://robj3g0fn0p"]
 
-[ext_resource type="Script" uid="uid://c6vmxkvdg24eg" path="res://Scenes/player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://c6vmxkvdg24eg" path="res://Code/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://c8gw2oosylcy" path="res://Sprites/Jungle Monkey Platformer/Jungle Monkey Platformer/1-Sprites/Character Spritesheets/1-Idle/Idle.png" id="2_hqtel"]
 [ext_resource type="Texture2D" uid="uid://brrfffajiipar" path="res://Sprites/Jungle Monkey Platformer/Jungle Monkey Platformer/1-Sprites/Character Spritesheets/3-Jump/Jump.png" id="3_sweqy"]
 [ext_resource type="Texture2D" uid="uid://b3bjts08qie2p" path="res://Sprites/Jungle Monkey Platformer/Jungle Monkey Platformer/1-Sprites/Character Spritesheets/2-Run/Run.png" id="4_2hs0m"]

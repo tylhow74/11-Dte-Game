@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0vpsni60hid5"]
 
 [ext_resource type="Texture2D" uid="uid://bdke7l0ecnxbk" path="res://Sprites/New Piskel-1.png (27).png" id="1_ftl74"]
-[ext_resource type="Script" uid="uid://bdx71nb8tyepo" path="res://Scenes/button.gd" id="2_5mq0c"]
+[ext_resource type="Script" uid="uid://bdx71nb8tyepo" path="res://Code/button.gd" id="2_5mq0c"]
 
 [node name="Deathscreen" type="Node2D"]
 

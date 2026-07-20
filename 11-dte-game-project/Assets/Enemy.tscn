@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://18mfnlls461l"]
 
-[ext_resource type="Script" uid="uid://da3wcfoe3vw5t" path="res://Scenes/enemy.gd" id="1_s7bn3"]
+[ext_resource type="Script" uid="uid://da3wcfoe3vw5t" path="res://Code/enemy.gd" id="1_s7bn3"]
 [ext_resource type="Texture2D" uid="uid://nhe07pyc1eo7" path="res://Sprites/AnimatedTigerSpriteSheet.png" id="2_s7bn3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hac7"]
