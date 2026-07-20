@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0bdcf3kmwd6y"]
+
+[ext_resource type="Script" uid="uid://dpxqpenkrng4g" path="res://Code/vine.gd" id="1_yxne0"]
+[ext_resource type="Texture2D" uid="uid://xppema588sid" path="res://Sprites/index.icon.png" id="2_838xb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rovuq"]
+size = Vector2(34, 128)
+
+[node name="vine" type="Area2D"]
+script = ExtResource("1_yxne0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, 0)
+scale = Vector2(0.2578125, 1)
+texture = ExtResource("2_838xb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_rovuq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

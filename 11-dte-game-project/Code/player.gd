@@ -24,6 +24,8 @@ var dead = false
 
 var banana_count = 0
 
+var can_climb = false
+const CLIMB_SPEED = 150.0
 
 @onready var anim = $AnimatedSprite2D
 @onready var hp_bar = $ProgressBar
@@ -60,6 +62,14 @@ func _physics_process(delta):
 		gravity = NORMAL_GRAVITY
 		jump_force = NORMAL_JUMP
 
+	# Vine climbing
+	if can_climb:
+		if Input.is_action_pressed("move_up"): # Map W to "move_up"
+			velocity.y = -CLIMB_SPEED
+		elif Input.is_action_pressed("move_down"): # Optional: S to climb down
+			velocity.y = CLIMB_SPEED
+		else:
+			velocity.y = 0
 
 	# Gravity
 	if not is_on_floor():
@@ -224,3 +234,9 @@ func die():
 
 	death_screen.show_death_screen()
 	get_tree().paused = true
+
+func enter_vine():
+	can_climb = true
+
+func exit_vine():
+	can_climb = false

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bpf28ldws6261"]
 
 [ext_resource type="Script" uid="uid://btggycn5107au" path="res://Code/node_2d.gd" id="1_7wcun"]
-[ext_resource type="Texture2D" uid="uid://4mvpfht7t3q" path="res://Sprites/New Piskel-1.png (20).png" id="2_dcmoc"]
+[ext_resource type="Texture2D" uid="uid://bkkgv2jwmhr2g" path="res://Sprites/Screenshot 2026-07-21 102248.png" id="2_5fd8d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmoj4"]
 size = Vector2(32.002438, 28)
@@ -15,7 +15,9 @@ position = Vector2(4.8116965e-07, 2)
 shape = SubResource("RectangleShape2D_qmoj4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_dcmoc")
+position = Vector2(-0.14415455, 2.000001)
+scale = Vector2(0.3509864, 0.3218391)
+texture = ExtResource("2_5fd8d")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
