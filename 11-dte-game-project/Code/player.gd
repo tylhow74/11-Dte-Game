@@ -34,11 +34,13 @@ const CLIMB_SPEED = 150.0
 
 func _ready():
 
+	print(banana_label)
 	hp_bar.min_value = 0
 	hp_bar.max_value = max_health
 	hp_bar.value = health
 
 	update_banana_ui()
+
 
 
 

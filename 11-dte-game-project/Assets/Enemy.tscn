@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://18mfnlls461l"]
+[gd_scene load_steps=14 format=3 uid="uid://18mfnlls461l"]
 
 [ext_resource type="Script" uid="uid://da3wcfoe3vw5t" path="res://Code/enemy.gd" id="1_s7bn3"]
 [ext_resource type="Texture2D" uid="uid://nhe07pyc1eo7" path="res://Sprites/AnimatedTigerSpriteSheet.png" id="2_s7bn3"]
@@ -75,6 +75,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7bn3"]
 size = Vector2(9.53099, 8.109679)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xby7n"]
+size = Vector2(9.53099, 3.0035849)
+
 [node name="Enemy" type="CharacterBody2D"]
 z_index = 101
 scale = Vector2(3.147627, 3.3293548)
@@ -89,3 +92,12 @@ animation = &"walk"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3.02982e-07, -0.45053804)
 shape = SubResource("RectangleShape2D_s7bn3")
+
+[node name="Stomparea" type="Area2D" parent="."]
+position = Vector2(0, -5.7068114)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomparea"]
+position = Vector2(0, -0.30035877)
+shape = SubResource("RectangleShape2D_xby7n")
+
+[connection signal="body_entered" from="Stomparea" to="." method="_on_stomparea_body_entered"]

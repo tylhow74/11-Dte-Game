@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c0bdcf3kmwd6y"]
 
 [ext_resource type="Script" uid="uid://dpxqpenkrng4g" path="res://Code/vine.gd" id="1_yxne0"]
-[ext_resource type="Texture2D" uid="uid://xppema588sid" path="res://Sprites/index.icon.png" id="2_838xb"]
+[ext_resource type="Texture2D" uid="uid://dk3vy6swrgixw" path="res://Sprites/New Piskel-1.png (30).png" id="2_yxne0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rovuq"]
 size = Vector2(34, 128)
@@ -10,9 +10,9 @@ size = Vector2(34, 128)
 script = ExtResource("1_yxne0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.5, 0)
-scale = Vector2(0.2578125, 1)
-texture = ExtResource("2_838xb")
+position = Vector2(1.0000005, -5.722046e-06)
+scale = Vector2(1.0625001, 4.0000005)
+texture = ExtResource("2_yxne0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
