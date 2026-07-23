@@ -5,48 +5,78 @@ const GRAVITY = 900
 
 var direction = 1
 var health = 3
+var can_damage = true
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var hp_bar = $ProgressBar
+
+
+func _ready():
+
+	hp_bar.max_value = health
+	hp_bar.value = health
 
 func _physics_process(delta):
-	# Gravity
+
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
 
-	# Move
 	velocity.x = SPEED * direction
 
 	move_and_slide()
 
-	# Turn around
+
 	if is_on_wall():
 		direction *= -1
 
-	# Flip sprite
-	animated_sprite.flip_h = direction > 0
 
-	# Play animation
+	animated_sprite.flip_h = direction > 0
 	animated_sprite.play("walk")
 
-# Check if enemy touched player
+
+	# Player damage
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var body = collision.get_collider()
 
-		if body.name == "Player":
+		if body.is_in_group("player") and can_damage:
+			can_damage = false
 			body.take_damage(10)
 
+			await get_tree().create_timer(0.5).timeout
+			can_damage = true
+
+func _on_stomparea_body_entered(body: Node2D) -> void:
+
+	print("STOMP SIGNAL:", body.name)
+
+	if body.is_in_group("player"):
+
+		print("DAMAGING ENEMY")
+
+		health -= 1
+
+		print("Enemy HP:", health)
+
+		body.bounce()
+
+		if health <= 0:
+			queue_free()
+
 func take_damage(amount):
+
+	print("Enemy took damage:", amount)
+
 	health -= amount
-	print("Enemy HP:", health)
+
+	print("Current HP:", health)
+
+	hp_bar.value = health
 
 	if health <= 0:
 		die()
 
-
 func die():
+
 	print("Enemy died")
 	queue_free()
-
-func _on_stomp_area_body_entered(body):
-	print("Something entered:", body.name)

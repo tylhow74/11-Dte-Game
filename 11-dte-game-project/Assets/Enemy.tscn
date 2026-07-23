@@ -78,7 +78,7 @@ size = Vector2(9.53099, 8.109679)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xby7n"]
 size = Vector2(9.53099, 3.0035849)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 z_index = 101
 scale = Vector2(3.147627, 3.3293548)
 script = ExtResource("1_s7bn3")
@@ -93,11 +93,21 @@ animation = &"walk"
 position = Vector2(3.02982e-07, -0.45053804)
 shape = SubResource("RectangleShape2D_s7bn3")
 
-[node name="Stomparea" type="Area2D" parent="."]
-position = Vector2(0, -5.7068114)
+[node name="stomparea" type="Area2D" parent="." groups=["enemy"]]
+position = Vector2(0, -6.3075285)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomparea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stomparea"]
 position = Vector2(0, -0.30035877)
 shape = SubResource("RectangleShape2D_xby7n")
 
-[connection signal="body_entered" from="Stomparea" to="." method="_on_stomparea_body_entered"]
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -8.260191
+offset_top = 9.611472
+offset_right = -4.260191
+offset_bottom = 36.611473
+scale = Vector2(4.1134567, -0.20421007)
+max_value = 3.0
+value = 3.0
+show_percentage = false
+
+[connection signal="body_entered" from="stomparea" to="." method="_on_stomparea_body_entered"]
