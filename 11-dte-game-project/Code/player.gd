@@ -5,16 +5,18 @@ const WATER_SPEED = 100.0
 
 const NORMAL_GRAVITY = 900.0
 const WATER_GRAVITY = 200.0
+const SPACE_GRAVITY = 150.0
 
 const NORMAL_JUMP = -375.0
 const WATER_JUMP = -150.0
-
+const SPACE_JUMP = -250.0
 
 var speed = NORMAL_SPEED
 var gravity = NORMAL_GRAVITY
 var jump_force = NORMAL_JUMP
 
 var in_water = false
+var in_space = false
 
 var max_health = 100
 var health = 100
@@ -27,14 +29,12 @@ var banana_count = 0
 var can_climb = false
 const CLIMB_SPEED = 150.0
 
-
 @onready var anim = $AnimatedSprite2D
 @onready var hp_bar = $ProgressBar
 @onready var banana_label = $"../CanvasLayer/BananaLabel"
 
 
 func _ready():
-
 	hp_bar.min_value = 0
 	hp_bar.max_value = max_health
 	hp_bar.value = health
@@ -42,17 +42,20 @@ func _ready():
 	update_banana_ui()
 
 
-
 func _physics_process(delta):
 
 	if dead:
 		return
 
-
 	check_water()
 
+	# Choose movement settings
+	if in_space:
+		speed = NORMAL_SPEED
+		gravity = SPACE_GRAVITY
+		jump_force = SPACE_JUMP
 
-	if in_water:
+	elif in_water:
 		speed = WATER_SPEED
 		gravity = WATER_GRAVITY
 		jump_force = WATER_JUMP
@@ -61,8 +64,6 @@ func _physics_process(delta):
 		speed = NORMAL_SPEED
 		gravity = NORMAL_GRAVITY
 		jump_force = NORMAL_JUMP
-
-
 
 	# Vine climbing
 	if can_climb:
@@ -76,54 +77,37 @@ func _physics_process(delta):
 		else:
 			velocity.y = 0
 
-
-
 	# Gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-
-
 	# Movement
 	var direction = Input.get_axis("move_left", "move_right")
 
-
 	if direction != 0:
-
 		velocity.x = direction * speed
 		anim.flip_h = direction < 0
-
 	else:
-
 		velocity.x = 0
-
-
 
 	# Jump
 	if Input.is_action_just_pressed("jump"):
 
 		if is_on_floor() or in_water:
-
 			velocity.y = jump_force
-
-
 
 	# Animation
 	if not is_on_floor():
-
 		anim.play("jump")
 
 	elif direction != 0:
-
 		anim.play("run")
 
 	else:
-
 		anim.play("idle")
 
-
-
 	move_and_slide()
+
 
 func bounce():
 
@@ -136,6 +120,7 @@ func bounce():
 		velocity.x = direction * 250
 	else:
 		velocity.x = velocity.x * 1.5
+
 
 # ---------------- WATER ----------------
 
@@ -150,19 +135,25 @@ func check_water():
 	params.position = global_position
 	params.collide_with_areas = true
 
-
 	var hits = space_state.intersect_point(params)
-
 
 	for hit in hits:
 
 		var collider = hit.collider
 
 		if collider and collider.is_in_group("water"):
-
 			in_water = true
 			return
 
+
+# ---------------- SPACE ----------------
+
+func enter_space():
+	in_space = true
+
+
+func exit_space():
+	in_space = false
 
 
 # ---------------- BANANAS ----------------
@@ -174,13 +165,10 @@ func add_banana():
 	update_banana_ui()
 
 
-
 func update_banana_ui():
 
 	if banana_label:
-
 		banana_label.text = "Bananas: " + str(banana_count)
-
 
 
 # ---------------- DAMAGE ----------------
@@ -188,9 +176,7 @@ func update_banana_ui():
 func take_damage(amount):
 
 	if invincible or dead:
-
 		return
-
 
 	health -= amount
 
@@ -198,16 +184,11 @@ func take_damage(amount):
 
 	hp_bar.value = health
 
-
 	flash_red()
 
-
 	if health <= 0:
-
 		die()
-
 		return
-
 
 	invincible = true
 
@@ -216,19 +197,17 @@ func take_damage(amount):
 	invincible = false
 
 
-
 func flash_red():
 
 	for i in range(3):
 
-		anim.modulate = Color(1,0.2,0.2)
+		anim.modulate = Color(1, 0.2, 0.2)
 
 		await get_tree().create_timer(0.05).timeout
 
 		anim.modulate = Color.WHITE
 
 		await get_tree().create_timer(0.05).timeout
-
 
 
 # ---------------- DEATH ----------------
@@ -238,14 +217,11 @@ func die():
 	if dead:
 		return
 
-
 	dead = true
 
 	velocity = Vector2.ZERO
 
-
 	var death_screen = get_tree().get_first_node_in_group("death_screen")
-
 
 	if death_screen == null:
 
@@ -253,21 +229,16 @@ func die():
 
 		return
 
-
 	death_screen.show_death_screen()
 
 	get_tree().paused = true
 
 
-
 # ---------------- VINES ----------------
 
 func enter_vine():
-
 	can_climb = true
 
 
-
 func exit_vine():
-
 	can_climb = false

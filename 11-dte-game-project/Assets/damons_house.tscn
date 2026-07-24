@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0uni8nt05y3i"]
+
+[ext_resource type="Script" uid="uid://dx3sl0pyt8dqo" path="res://Code/damons_house.gd" id="1_h4st7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_463ls"]
+size = Vector2(296, 133)
+
+[node name="Damons House" type="Area2D"]
+script = ExtResource("1_h4st7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(138, 56.5)
+shape = SubResource("RectangleShape2D_463ls")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
