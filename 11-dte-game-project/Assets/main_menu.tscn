@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://clc0jnp8is1hb"]
+[gd_scene load_steps=8 format=3 uid="uid://clc0jnp8is1hb"]
 
-[ext_resource type="FontFile" uid="uid://c84ylrse48vmp" path="res://Fonts/contempo jungle minuet.ttf" id="1_7yqf0"]
 [ext_resource type="Texture2D" uid="uid://g3awry575hp4" path="res://Sprites/Screenshot 2026-07-21 102529.png" id="1_f3kvc"]
 [ext_resource type="Script" uid="uid://2pv5xwoguxg4" path="res://Code/start.gd" id="1_kmbup"]
-[ext_resource type="FontFile" uid="uid://dv6qyolq74nqn" path="res://Fonts/DANCING JUNGLE.ttf" id="2_f3kvc"]
 [ext_resource type="Script" uid="uid://cc77n3upvbotc" path="res://Code/quit.gd" id="2_sqfmn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2s7lt"]
@@ -54,7 +52,6 @@ offset_top = 103.0
 offset_right = 830.0
 offset_bottom = 219.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_7yqf0")
 theme_override_font_sizes/font_size = 85
 text = "Banana Blitz"
 horizontal_alignment = 1
@@ -69,7 +66,6 @@ offset_bottom = 355.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_f3kvc")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_2s7lt")
 theme_override_styles/hover = SubResource("StyleBoxFlat_jix8l")
@@ -85,7 +81,6 @@ offset_bottom = 511.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_f3kvc")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_fu7sn")
 theme_override_styles/hover = SubResource("StyleBoxFlat_glbon")

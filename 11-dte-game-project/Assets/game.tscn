@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://2qcr1jq0mj53"]
+[gd_scene load_steps=50 format=3 uid="uid://2qcr1jq0mj53"]
 
 [ext_resource type="PackedScene" uid="uid://wddnse8xh4ov" path="res://Assets/Border.tscn" id="1_7gxm0"]
 [ext_resource type="Texture2D" uid="uid://g3awry575hp4" path="res://Sprites/Screenshot 2026-07-21 102529.png" id="2_n4cug"]
@@ -21,11 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://b3xwq8nkhx0im" path="res://Sprites/New Piskel-1.png (34).png" id="15_7kope"]
 [ext_resource type="Script" uid="uid://crsy6tw1agbxl" path="res://Code/control.gd" id="16_nljpe"]
 [ext_resource type="Script" uid="uid://dgvbf54egdgl2" path="res://Code/quitbutton.gd" id="18_hidsp"]
-[ext_resource type="FontFile" uid="uid://c84ylrse48vmp" path="res://Fonts/contempo jungle minuet.ttf" id="19_5qona"]
 [ext_resource type="Script" uid="uid://rxc4o2ld4bpw" path="res://Code/blackness.gd" id="19_k380c"]
 [ext_resource type="Texture2D" uid="uid://cx4uaivss4dp0" path="res://Sprites/OIP-1.png-1.png.png" id="20_5qona"]
 [ext_resource type="PackedScene" uid="uid://18mfnlls461l" path="res://Assets/Enemy.tscn" id="20_52sct"]
-[ext_resource type="FontFile" uid="uid://dv6qyolq74nqn" path="res://Fonts/DANCING JUNGLE.ttf" id="21_n4cug"]
 [ext_resource type="PackedScene" uid="uid://c0bdcf3kmwd6y" path="res://Assets/vine.tscn" id="21_o2pgx"]
 [ext_resource type="PackedScene" uid="uid://b0uni8nt05y3i" path="res://Assets/damons_house.tscn" id="26_js2nt"]
 [ext_resource type="Script" uid="uid://bbfwui375bftt" path="res://Assets/blackness_2.gd" id="29_lfj23"]
@@ -1086,14 +1084,14 @@ rotation = -3.1415925
 scale = Vector2(1.1483412, -1.0128889)
 
 [node name="Border2" parent="Border" instance=ExtResource("1_7gxm0")]
-position = Vector2(-4091.9893, -1692.1904)
+position = Vector2(-4135.5293, -1692.1904)
 rotation = -3.1415925
 scale = Vector2(1.1483411, -9.7404)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1862.2747, -6043.779)
+position = Vector2(1957, -6779.0005)
 rotation = -3.6966554e-05
-scale = Vector2(174.44409, 319.01147)
+scale = Vector2(262.31024, 365.00546)
 skew = 7.4505806e-05
 texture = ExtResource("3_up1br")
 
@@ -1133,7 +1131,7 @@ position = Vector2(2243, -2517)
 position = Vector2(4104, -1640)
 
 [node name="Player" parent="." instance=ExtResource("12_hxo8q")]
-position = Vector2(3143, -884)
+position = Vector2(92, -38)
 
 [node name="Death Barrier" parent="." instance=ExtResource("13_3007y")]
 position = Vector2(1383, 395)
@@ -1190,7 +1188,6 @@ scale = Vector2(2.781215, 2.5478415)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("21_n4cug")
 theme_override_styles/normal = SubResource("StyleBoxFlat_rvswv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wojuw")
 text = "RESTART"
@@ -1203,7 +1200,6 @@ offset_right = -29.0
 offset_bottom = -176.0
 scale = Vector2(6, 8.009)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("19_5qona")
 text = "You Died"
 
 [node name="Quit button" type="Button" parent="Death Screen/Death Screen"]
@@ -1216,7 +1212,6 @@ scale = Vector2(3.545859, 2.8979602)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("21_n4cug")
 theme_override_styles/normal = SubResource("StyleBoxFlat_boyg6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_up1br")
 text = "Quit
@@ -1268,7 +1263,6 @@ position = Vector2(4241, 72)
 [node name="BananaLabel" type="Label" parent="CanvasLayer"]
 offset_right = 164.0
 offset_bottom = 47.0
-theme_override_fonts/font = ExtResource("21_n4cug")
 label_settings = SubResource("LabelSettings_iotsf")
 
 [node name="vine" parent="." instance=ExtResource("21_o2pgx")]
@@ -1287,7 +1281,7 @@ position = Vector2(4516, -220.00002)
 scale = Vector2(1, 1.6800001)
 
 [node name="Damons House" parent="." instance=ExtResource("26_js2nt")]
-position = Vector2(865.00006, -4733)
+position = Vector2(882, -4733.001)
 scale = Vector2(-607.1267, 30.755611)
 
 [node name="Enemy2" parent="." instance=ExtResource("20_52sct")]

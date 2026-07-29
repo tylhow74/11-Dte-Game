@@ -45,7 +45,7 @@ func _physics_process(delta):
 
 		if body.is_in_group("player") and can_damage:
 			can_damage = false
-			body.take_damage(10)
+			body.take_damage(25)
 
 			await get_tree().create_timer(0.5).timeout
 			can_damage = true
