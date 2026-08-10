@@ -1,5 +1,6 @@
-[gd_scene load_steps=50 format=3 uid="uid://2qcr1jq0mj53"]
+[gd_scene load_steps=51 format=3 uid="uid://2qcr1jq0mj53"]
 
+[ext_resource type="Script" uid="uid://cx65ej584sjea" path="res://Assets/game.gd" id="1_6f80p"]
 [ext_resource type="PackedScene" uid="uid://wddnse8xh4ov" path="res://Assets/Border.tscn" id="1_7gxm0"]
 [ext_resource type="Texture2D" uid="uid://g3awry575hp4" path="res://Sprites/Screenshot 2026-07-21 102529.png" id="2_n4cug"]
 [ext_resource type="PackedScene" uid="uid://bpf28ldws6261" path="res://Assets/water.tscn" id="3_5qona"]
@@ -1077,6 +1078,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 position = Vector2(0, 10)
+script = ExtResource("1_6f80p")
 
 [node name="Border" parent="." instance=ExtResource("1_7gxm0")]
 position = Vector2(-74, -349.00003)
