@@ -1076,8 +1076,7 @@ font_color = Color(1, 0.8156863, 0, 1)
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Game" type="Node2D"]
-position = Vector2(0, 10)
+[node name="Game" type="Node"]
 script = ExtResource("1_6f80p")
 
 [node name="Border" parent="." instance=ExtResource("1_7gxm0")]
@@ -1100,7 +1099,7 @@ texture = ExtResource("3_up1br")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(2038.3966, 164.66373)
 rotation = 3.139547
-scale = Vector2(6.7333407, -5.025711)
+scale = Vector2(6.733341, -5.025711)
 texture = ExtResource("2_n4cug")
 
 [node name="Water" parent="." instance=ExtResource("3_5qona")]
@@ -1284,13 +1283,22 @@ scale = Vector2(1, 1.6800001)
 
 [node name="Damons House" parent="." instance=ExtResource("26_js2nt")]
 position = Vector2(882, -4733.001)
-scale = Vector2(-607.1267, 30.755611)
+rotation = -3.1415927
+scale = Vector2(607.1267, -30.755611)
 
 [node name="Enemy2" parent="." instance=ExtResource("20_52sct")]
 position = Vector2(3944, -320)
 
 [node name="Enemy4" parent="." instance=ExtResource("20_52sct")]
 position = Vector2(2711, -2511)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="Label" type="Label" parent="Timer"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [connection signal="body_entered" from="Damage Zone" to="Water" method="_on_damage_zone_body_entered"]
 [connection signal="body_exited" from="Damage Zone" to="Water" method="_on_damage_zone_body_exited"]

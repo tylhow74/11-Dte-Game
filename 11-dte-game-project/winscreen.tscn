@@ -1,7 +1,24 @@
-[gd_scene format=3 uid="uid://d34ake70ujjp8"]
+[gd_scene load_steps=2 format=3 uid="uid://d34ake70ujjp8"]
+
+[ext_resource type="Texture2D" uid="uid://biljrj3ak1ppr" path="res://Sprites/New Piskel-1.png (36).png" id="1_y55kr"]
 
 [node name="winscreen" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0
 offset_bottom = 648.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 176.0
+offset_top = 319.0
+offset_right = 990.0
+offset_bottom = 664.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 125
+text = "   YOU WON!
+OR DID YOU?"
+
+[node name="NewPiskel1_png(36)" type="Sprite2D" parent="."]
+position = Vector2(599.00006, 131)
+scale = Vector2(4.375001, 6.03125)
+texture = ExtResource("1_y55kr")
