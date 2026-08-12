@@ -1134,6 +1134,14 @@ position = Vector2(4104, -1640)
 [node name="Player" parent="." instance=ExtResource("12_hxo8q")]
 position = Vector2(92, -38)
 
+[node name="Timer" type="Timer" parent="Player"]
+wait_time = 180.0
+one_shot = true
+
+[node name="Label" type="Label" parent="Player/Timer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Death Barrier" parent="." instance=ExtResource("13_3007y")]
 position = Vector2(1383, 395)
 scale = Vector2(5.679999, 1.0085788)
@@ -1292,14 +1300,7 @@ position = Vector2(3944, -320)
 [node name="Enemy4" parent="." instance=ExtResource("20_52sct")]
 position = Vector2(2711, -2511)
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 30.0
-one_shot = true
-
-[node name="Label" type="Label" parent="Timer"]
-offset_right = 40.0
-offset_bottom = 23.0
-
+[connection signal="timeout" from="Player/Timer" to="Player" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Damage Zone" to="Water" method="_on_damage_zone_body_entered"]
 [connection signal="body_exited" from="Damage Zone" to="Water" method="_on_damage_zone_body_exited"]
 [connection signal="pressed" from="Death Screen/Death Screen/Restart button" to="Death Screen/Death Screen" method="_on_restartbutton_pressed"]

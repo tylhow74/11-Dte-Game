@@ -33,6 +33,10 @@ const CLIMB_SPEED = 150.0
 @onready var hp_bar = $ProgressBar
 @onready var banana_label = $"../CanvasLayer/BananaLabel"
 
+# TIMER
+@onready var timer = $Timer
+@onready var label = $Timer/Label
+
 
 func _ready():
 	hp_bar.min_value = 0
@@ -40,6 +44,9 @@ func _ready():
 	hp_bar.value = health
 
 	update_banana_ui()
+
+	# Start the timer
+	timer.start()
 
 
 func _physics_process(delta):
@@ -109,11 +116,20 @@ func _physics_process(delta):
 	move_and_slide()
 
 
+func _process(delta):
+	# Update timer text
+	label.text = str(ceil(timer.time_left))
+
+
+func _on_timer_timeout():
+	# Timer reached 0, kill player
+	die()
+
+
 func bounce():
 
 	velocity.y = -350
 
-	# Push player away slightly based on movement direction
 	var direction = Input.get_axis("move_left", "move_right")
 
 	if direction != 0:
