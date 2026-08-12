@@ -1138,9 +1138,12 @@ position = Vector2(92, -38)
 wait_time = 180.0
 one_shot = true
 
-[node name="Label" type="Label" parent="Player/Timer"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Label" type="Label" parent="Player"]
+offset_left = -92.0
+offset_top = 38.0
+offset_right = -52.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 18
 
 [node name="Death Barrier" parent="." instance=ExtResource("13_3007y")]
 position = Vector2(1383, 395)

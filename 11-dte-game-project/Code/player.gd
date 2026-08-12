@@ -35,7 +35,7 @@ const CLIMB_SPEED = 150.0
 
 # TIMER
 @onready var timer = $Timer
-@onready var label = $Timer/Label
+@onready var label = $Label
 
 
 func _ready():
@@ -45,7 +45,10 @@ func _ready():
 
 	update_banana_ui()
 
-	# Start the timer
+	# Put timer label above player's head
+	label.position = Vector2(-20, -200)
+
+	# Start timer
 	timer.start()
 
 
@@ -122,7 +125,7 @@ func _process(delta):
 
 
 func _on_timer_timeout():
-	# Timer reached 0, kill player
+	# Timer reached 0
 	die()
 
 
