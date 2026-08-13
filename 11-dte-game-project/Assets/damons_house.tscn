@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_463ls"]
 size = Vector2(296, 133)
 
-[node name="Damons House" type="Area2D"]
+[node name="Damons_house" type="Area2D"]
 script = ExtResource("1_h4st7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

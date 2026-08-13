@@ -1,24 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://d34ake70ujjp8"]
+[gd_scene load_steps=4 format=3 uid="uid://d34ake70ujjp8"]
 
-[ext_resource type="Texture2D" uid="uid://biljrj3ak1ppr" path="res://Sprites/New Piskel-1.png (36).png" id="1_y55kr"]
+[ext_resource type="Texture2D" uid="uid://g3awry575hp4" path="res://Sprites/Screenshot 2026-07-21 102529.png" id="1_h3yos"]
+[ext_resource type="Texture2D" uid="uid://l1l7si1kdotl" path="res://Sprites/OIP-1.png-1.png-1.png.png" id="2_ehxyi"]
+[ext_resource type="Texture2D" uid="uid://dglunywy21pal" path="res://New Piskel-1.png (13)-1.png (2)-1.png-1.png.png" id="3_ehxyi"]
 
 [node name="winscreen" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
+[node name="Screenshot20260721102529" type="Sprite2D" parent="."]
+position = Vector2(577.25, 322.5)
+scale = Vector2(1.2917134, 1.4638009)
+texture = ExtResource("1_h3yos")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 176.0
-offset_top = 319.0
-offset_right = 990.0
-offset_bottom = 664.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+offset_left = 268.0
+offset_top = 332.0
+offset_right = 914.0
+offset_bottom = 503.0
+theme_override_colors/font_color = Color(0.44705883, 0.73333335, 0.9529412, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 125
-text = "   YOU WON!
-OR DID YOU?"
+text = "YOU WON!"
 
-[node name="NewPiskel1_png(36)" type="Sprite2D" parent="."]
-position = Vector2(599.00006, 131)
-scale = Vector2(4.375001, 6.03125)
-texture = ExtResource("1_y55kr")
+[node name="Oip1_png1_png1_png" type="Sprite2D" parent="."]
+position = Vector2(582, 181)
+scale = Vector2(4.765625, 4.53125)
+texture = ExtResource("2_ehxyi")
+
+[node name="NewPiskel1_png(13)1_png(2)1_png1_png" type="Sprite2D" parent="."]
+position = Vector2(27, 28)
+scale = Vector2(0.5703125, 0.5703125)
+texture = ExtResource("3_ehxyi")
