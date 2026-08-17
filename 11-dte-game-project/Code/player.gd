@@ -11,6 +11,8 @@ const NORMAL_JUMP = -375.0
 const WATER_JUMP = -150.0
 const SPACE_JUMP = -250.0
 
+const CLIMB_SPEED = 150.0
+
 var speed = NORMAL_SPEED
 var gravity = NORMAL_GRAVITY
 var jump_force = NORMAL_JUMP
@@ -26,8 +28,10 @@ var dead = false
 
 var banana_count = 0
 
+# Climbing
 var can_climb = false
-const CLIMB_SPEED = 150.0
+var wall_climbing = false
+
 
 @onready var anim = $AnimatedSprite2D
 @onready var hp_bar = $ProgressBar
@@ -75,7 +79,11 @@ func _physics_process(delta):
 		gravity = NORMAL_GRAVITY
 		jump_force = NORMAL_JUMP
 
-	# Vine climbing
+
+	# --------------------------------
+	# VINE CLIMBING
+	# --------------------------------
+
 	if can_climb:
 
 		if Input.is_action_pressed("move_up"):
@@ -87,11 +95,30 @@ func _physics_process(delta):
 		else:
 			velocity.y = 0
 
-	# Gravity
-	if not is_on_floor():
+
+	# --------------------------------
+	# WALL CLIMBING
+	# --------------------------------
+
+	wall_climbing = false
+
+	if is_on_wall() and Input.is_action_pressed("move_up"):
+		wall_climbing = true
+		velocity.y = -CLIMB_SPEED
+
+
+	# --------------------------------
+	# GRAVITY
+	# --------------------------------
+
+	if not is_on_floor() and not wall_climbing and not can_climb:
 		velocity.y += gravity * delta
 
-	# Movement
+
+	# --------------------------------
+	# HORIZONTAL MOVEMENT
+	# --------------------------------
+
 	var direction = Input.get_axis("move_left", "move_right")
 
 	if direction != 0:
@@ -100,13 +127,21 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0
 
-	# Jump
+
+	# --------------------------------
+	# JUMP
+	# --------------------------------
+
 	if Input.is_action_just_pressed("jump"):
 
 		if is_on_floor() or in_water:
 			velocity.y = jump_force
 
-	# Animation
+
+	# --------------------------------
+	# ANIMATION
+	# --------------------------------
+
 	if not is_on_floor():
 		anim.play("jump")
 
@@ -116,15 +151,18 @@ func _physics_process(delta):
 	else:
 		anim.play("idle")
 
+
 	move_and_slide()
 
 
 func _process(delta):
+
 	# Update timer text
 	label.text = str(ceil(timer.time_left))
 
 
 func _on_timer_timeout():
+
 	# Timer reached 0
 	die()
 
@@ -168,10 +206,12 @@ func check_water():
 # ---------------- SPACE ----------------
 
 func enter_space():
+
 	in_space = true
 
 
 func exit_space():
+
 	in_space = false
 
 
@@ -256,8 +296,10 @@ func die():
 # ---------------- VINES ----------------
 
 func enter_vine():
+
 	can_climb = true
 
 
 func exit_vine():
+
 	can_climb = false
