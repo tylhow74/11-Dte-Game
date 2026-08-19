@@ -2,16 +2,20 @@ extends CharacterBody2D
 
 const NORMAL_SPEED = 200.0
 const WATER_SPEED = 100.0
+const SPEED_BOOST = 1000.0
 
 const NORMAL_GRAVITY = 900.0
 const WATER_GRAVITY = 200.0
 const SPACE_GRAVITY = 150.0
 
-const NORMAL_JUMP = -375.0
+const NORMAL_JUMP = -375
 const WATER_JUMP = -150.0
 const SPACE_JUMP = -250.0
 
 const CLIMB_SPEED = 150.0
+
+# FLYING
+const FLY_SPEED = 500.0
 
 var speed = NORMAL_SPEED
 var gravity = NORMAL_GRAVITY
@@ -20,8 +24,14 @@ var jump_force = NORMAL_JUMP
 var in_water = false
 var in_space = false
 
-var max_health = 100
-var health = 100
+# Flying
+var flying = false
+
+# Speed boost
+var speed_boost = false
+
+var max_health = 10000000
+var health = 100000000
 
 var invincible = false
 var dead = false
@@ -43,16 +53,15 @@ var wall_climbing = false
 
 
 func _ready():
+
 	hp_bar.min_value = 0
 	hp_bar.max_value = max_health
 	hp_bar.value = health
 
 	update_banana_ui()
 
-	# Put timer label above player's head
 	label.position = Vector2(-20, -200)
 
-	# Start timer
 	timer.start()
 
 
@@ -63,36 +72,76 @@ func _physics_process(delta):
 
 	check_water()
 
-	# Choose movement settings
+
+	# --------------------------------
+	# FLY TOGGLE
+	# --------------------------------
+
+	if Input.is_action_just_pressed("fly"):
+		toggle_fly()
+
+
+	# --------------------------------
+	# SPEED BOOST TOGGLE
+	# --------------------------------
+
+	if Input.is_action_just_pressed("speed_boost"):
+		toggle_speed()
+
+
+	# --------------------------------
+	# MOVEMENT SETTINGS
+	# --------------------------------
+
 	if in_space:
-		speed = NORMAL_SPEED
+
 		gravity = SPACE_GRAVITY
 		jump_force = SPACE_JUMP
 
 	elif in_water:
-		speed = WATER_SPEED
+
 		gravity = WATER_GRAVITY
 		jump_force = WATER_JUMP
 
 	else:
-		speed = NORMAL_SPEED
+
 		gravity = NORMAL_GRAVITY
 		jump_force = NORMAL_JUMP
+
+
+	# --------------------------------
+	# SPEED
+	# --------------------------------
+
+	if speed_boost:
+
+		speed = SPEED_BOOST
+
+	elif in_water:
+
+		speed = WATER_SPEED
+
+	else:
+
+		speed = NORMAL_SPEED
 
 
 	# --------------------------------
 	# VINE CLIMBING
 	# --------------------------------
 
-	if can_climb:
+	if can_climb and not flying:
 
 		if Input.is_action_pressed("move_up"):
+
 			velocity.y = -CLIMB_SPEED
 
 		elif Input.is_action_pressed("move_down"):
+
 			velocity.y = CLIMB_SPEED
 
 		else:
+
 			velocity.y = 0
 
 
@@ -102,17 +151,41 @@ func _physics_process(delta):
 
 	wall_climbing = false
 
-	if is_on_wall() and Input.is_action_pressed("move_up"):
-		wall_climbing = true
-		velocity.y = -CLIMB_SPEED
+	if not flying:
+
+		if is_on_wall() and Input.is_action_pressed("move_up"):
+
+			wall_climbing = true
+			velocity.y = -CLIMB_SPEED
 
 
 	# --------------------------------
-	# GRAVITY
+	# FLYING / GRAVITY
 	# --------------------------------
 
-	if not is_on_floor() and not wall_climbing and not can_climb:
-		velocity.y += gravity * delta
+	if flying:
+
+		# W = UP
+		# S = DOWN
+
+		var fly_direction = Input.get_axis("move_down", "move_up")
+
+		if fly_direction != 0:
+
+			velocity.y = fly_direction * FLY_SPEED
+
+		else:
+
+			# Stay in the air
+			velocity.y = 0
+
+	else:
+
+		# Normal gravity
+
+		if not is_on_floor() and not wall_climbing and not can_climb:
+
+			velocity.y += gravity * delta
 
 
 	# --------------------------------
@@ -122,9 +195,12 @@ func _physics_process(delta):
 	var direction = Input.get_axis("move_left", "move_right")
 
 	if direction != 0:
+
 		velocity.x = direction * speed
 		anim.flip_h = direction < 0
+
 	else:
+
 		velocity.x = 0
 
 
@@ -132,9 +208,10 @@ func _physics_process(delta):
 	# JUMP
 	# --------------------------------
 
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and not flying:
 
 		if is_on_floor() or in_water:
+
 			velocity.y = jump_force
 
 
@@ -143,12 +220,15 @@ func _physics_process(delta):
 	# --------------------------------
 
 	if not is_on_floor():
+
 		anim.play("jump")
 
 	elif direction != 0:
+
 		anim.play("run")
 
 	else:
+
 		anim.play("idle")
 
 
@@ -157,15 +237,58 @@ func _physics_process(delta):
 
 func _process(delta):
 
-	# Update timer text
 	label.text = str(ceil(timer.time_left))
 
 
+# --------------------------------
+# FLYING
+# --------------------------------
+
+func toggle_fly():
+
+	flying = !flying
+
+	if flying:
+
+		print("FLY ON")
+
+		# Immediately launch into the air
+		velocity.y = -FLY_SPEED
+
+	else:
+
+		print("FLY OFF")
+
+
+# --------------------------------
+# SPEED BOOST
+# --------------------------------
+
+func toggle_speed():
+
+	speed_boost = !speed_boost
+
+	if speed_boost:
+
+		print("SPEED BOOST ON")
+
+	else:
+
+		print("SPEED BOOST OFF")
+
+
+# --------------------------------
+# TIMER
+# --------------------------------
+
 func _on_timer_timeout():
 
-	# Timer reached 0
 	die()
 
+
+# --------------------------------
+# BOUNCE
+# --------------------------------
 
 func bounce():
 
@@ -174,12 +297,17 @@ func bounce():
 	var direction = Input.get_axis("move_left", "move_right")
 
 	if direction != 0:
+
 		velocity.x = direction * 250
+
 	else:
+
 		velocity.x = velocity.x * 1.5
 
 
-# ---------------- WATER ----------------
+# --------------------------------
+# WATER
+# --------------------------------
 
 func check_water():
 
@@ -199,11 +327,15 @@ func check_water():
 		var collider = hit.collider
 
 		if collider and collider.is_in_group("water"):
+
 			in_water = true
+
 			return
 
 
-# ---------------- SPACE ----------------
+# --------------------------------
+# SPACE
+# --------------------------------
 
 func enter_space():
 
@@ -215,7 +347,9 @@ func exit_space():
 	in_space = false
 
 
-# ---------------- BANANAS ----------------
+# --------------------------------
+# BANANAS
+# --------------------------------
 
 func add_banana():
 
@@ -227,10 +361,13 @@ func add_banana():
 func update_banana_ui():
 
 	if banana_label:
+
 		banana_label.text = "Bananas: " + str(banana_count)
 
 
-# ---------------- DAMAGE ----------------
+# --------------------------------
+# DAMAGE
+# --------------------------------
 
 func take_damage(amount):
 
@@ -246,7 +383,9 @@ func take_damage(amount):
 	flash_red()
 
 	if health <= 0:
+
 		die()
+
 		return
 
 	invincible = true
@@ -269,7 +408,9 @@ func flash_red():
 		await get_tree().create_timer(0.05).timeout
 
 
-# ---------------- DEATH ----------------
+# --------------------------------
+# DEATH
+# --------------------------------
 
 func die():
 
@@ -293,7 +434,9 @@ func die():
 	get_tree().paused = true
 
 
-# ---------------- VINES ----------------
+# --------------------------------
+# VINES
+# --------------------------------
 
 func enter_vine():
 
