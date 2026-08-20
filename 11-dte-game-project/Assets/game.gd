@@ -1,7 +1,7 @@
 extends Node
 
 var bananas_collected = 0
-var total_bananas = 10
+var total_bananas = 11
 
 func collect_banana():
 	bananas_collected += 1

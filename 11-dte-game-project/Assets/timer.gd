@@ -1,6 +1,6 @@
 extends Node
 
-var time_left = 180
+var time_left = 240
 
 func _ready():
 	$UI/Timer.start()

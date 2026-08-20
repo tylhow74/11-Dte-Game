@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d34ake70ujjp8"]
+[gd_scene load_steps=5 format=3 uid="uid://d34ake70ujjp8"]
 
 [ext_resource type="Texture2D" uid="uid://g3awry575hp4" path="res://Sprites/Screenshot 2026-07-21 102529.png" id="1_h3yos"]
 [ext_resource type="Texture2D" uid="uid://l1l7si1kdotl" path="res://Sprites/OIP-1.png-1.png-1.png.png" id="2_ehxyi"]
 [ext_resource type="Texture2D" uid="uid://dglunywy21pal" path="res://New Piskel-1.png (13)-1.png (2)-1.png-1.png.png" id="3_ehxyi"]
+[ext_resource type="Script" uid="uid://b5u7524we5yj4" path="res://damon_leak.gd" id="4_pd04t"]
 
 [node name="winscreen" type="Node2D"]
 
@@ -27,7 +28,10 @@ position = Vector2(582, 181)
 scale = Vector2(4.765625, 4.53125)
 texture = ExtResource("2_ehxyi")
 
-[node name="NewPiskel1_png(13)1_png(2)1_png1_png" type="Sprite2D" parent="."]
-position = Vector2(27, 28)
-scale = Vector2(0.5703125, 0.5703125)
-texture = ExtResource("3_ehxyi")
+[node name="Damon Leak" type="Button" parent="."]
+offset_right = 136.0
+offset_bottom = 136.0
+icon = ExtResource("3_ehxyi")
+script = ExtResource("4_pd04t")
+
+[connection signal="pressed" from="Damon Leak" to="Damon Leak" method="_on_pressed"]

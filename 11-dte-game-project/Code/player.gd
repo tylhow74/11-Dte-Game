@@ -30,8 +30,8 @@ var flying = false
 # Speed boost
 var speed_boost = false
 
-var max_health = 10000000
-var health = 100000000
+var max_health = 100
+var health = 100
 
 var invincible = false
 var dead = false
