@@ -29,8 +29,11 @@ scale = Vector2(4.765625, 4.53125)
 texture = ExtResource("2_ehxyi")
 
 [node name="Damon Leak" type="Button" parent="."]
-offset_right = 136.0
-offset_bottom = 136.0
+offset_left = -1.0
+offset_top = -0.99999905
+offset_right = 135.0
+offset_bottom = 135.0
+scale = Vector2(0.16666667, 0.15008819)
 icon = ExtResource("3_ehxyi")
 script = ExtResource("4_pd04t")
 

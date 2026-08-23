@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const NORMAL_SPEED = 200.0
 const WATER_SPEED = 100.0
-const SPEED_BOOST = 1000.0
+const SPEED_BOOST = 10000.0
 
 const NORMAL_GRAVITY = 900.0
 const WATER_GRAVITY = 200.0
