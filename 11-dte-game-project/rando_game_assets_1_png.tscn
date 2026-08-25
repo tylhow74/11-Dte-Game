@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8kwg4cbcq58s"]
+
+[ext_resource type="Texture2D" uid="uid://nk4kfni27sdk" path="res://Rando game assets-1.png.png" id="1_llp5t"]
+[ext_resource type="Texture2D" uid="uid://dmgr3youe1i55" path="res://Rando game assets-3.png.png" id="2_rwkai"]
+[ext_resource type="Texture2D" uid="uid://bk7da6dnt7y8v" path="res://Rando game assets-2.png (2).png" id="3_s1g3a"]
+
+[node name="RandoGameAssets1_png" type="Sprite2D"]
+position = Vector2(342, 246)
+scale = Vector2(10, 10)
+texture = ExtResource("1_llp5t")
+
+[node name="RandoGameAssets3_png" type="Sprite2D" parent="."]
+position = Vector2(31.900002, -31.8)
+texture = ExtResource("2_rwkai")
+
+[node name="RandoGameAssets2_png(2)" type="Sprite2D" parent="."]
+position = Vector2(31.900002, -2.3841858e-07)
+texture = ExtResource("3_s1g3a")
